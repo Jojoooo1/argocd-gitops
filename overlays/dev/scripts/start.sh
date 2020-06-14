@@ -23,7 +23,7 @@ echo ">>> ingress deployment is done"
 
 echo
 echo ">>> Deploying argocd"
-kustomize build ../argocd | kubectl apply -f -
+kustomize build ../../../base/argocd | kubectl apply -f -
 
 echo
 echo ">>> Waiting for argocd to start"
@@ -32,7 +32,7 @@ echo ">>> argocd deployment is done"
 
 echo
 echo ">>> Deploying argocd parent applications" # declarative-setup: App of Apps (https://argoproj.github.io/argo-cd/operator-manual/declarative-setup/)
-kustomize build ../argocd-applications | kubectl apply -f -
+kubectl apply -f ../_argocd-parent-app
 echo ">>> argocd Applications & projects deployments are done"
 
 kubectl get pods -n argocd -l app.kubernetes.io/name=argocd-server -o name | cut -d'/' -f 2 # Get password
