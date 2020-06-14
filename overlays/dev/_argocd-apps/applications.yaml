@@ -16,4 +16,4 @@ spec:
     path: overlays/dev/applications
   destination:
     server: https://kubernetes.default.svc
-    namespace: default
+    namespace: default # Only used if metadata.namespace is not set
