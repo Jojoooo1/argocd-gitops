@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argocd-applications-app
+  name: applications
   namespace: argocd
   # By default, deleting an application will not perform a cascade delete, thereby deleting its resources. 
   # You must add the finalizer if you want this behaviour
