@@ -5,16 +5,10 @@ namespace: default #
 
 bases:
   - ../../../base/applications/spring-app
-  
-resources:
-  - spring-app/database/pv.yaml
-
 
 patchesStrategicMerge:
   - spring-app/deployment-patch.yaml
   - spring-app/configmap-patch.yaml
-
-  - spring-app/database/deployment-patch.yaml
   
 # images:
 # - name: alexmt/argocd-demo
