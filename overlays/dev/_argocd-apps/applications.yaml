@@ -16,4 +16,4 @@ spec:
     path: overlays/dev/applications
   destination:
     server: https://kubernetes.default.svc
-    namespace: test
+    namespace: default
