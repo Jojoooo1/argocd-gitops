@@ -6,4 +6,4 @@ namespace: default #
 # Can test using minikube tunnel & using istio-gw LoadBalanced external IP associated
 # Istio GW
 bases:
-  - ../../../../base/ingress
+  - ../../../../base/applications/ingress
