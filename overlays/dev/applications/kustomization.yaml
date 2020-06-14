@@ -7,6 +7,9 @@ bases:
   - ../../../base/applications/spring-app/backend
   - ../../../base/applications/spring-app/database
 
+resources:
+  - ingress
+
 patchesStrategicMerge:
   - spring-app/backend/configmap-patch.yaml
   
