@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - rbac.yaml
   - applications.yaml
-  - sealed-secret.yaml
+  - sealed-secrets.yaml
