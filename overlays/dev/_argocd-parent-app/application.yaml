@@ -9,6 +9,11 @@ metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      
   project: default
   source:
     repoURL: https://github.com/Jojoooo1/argocd-gitops.git
