@@ -4,11 +4,11 @@ kind: Kustomization
 namespace: default #
 
 bases:
-  - ../../../base/applications/spring-app
+  - ../../../base/applications/spring-app/backend
+  - ../../../base/applications/spring-app/database
 
 patchesStrategicMerge:
-  - spring-app/deployment-patch.yaml
-  - spring-app/configmap-patch.yaml
+  - spring-app/backend/configmap-patch.yaml
   
 # images:
 # - name: alexmt/argocd-demo
