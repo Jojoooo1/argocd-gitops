@@ -1,0 +1,27 @@
+---
+# Used by spring boot app
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: read-namespace
+  # namespace: set via kustomize
+---
+# Used by spring boot app
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+
+metadata:
+  name: read-namespace-rolebinding
+  # namespace: set via kustomize
+
+# Target
+subjects:
+  - kind: ServiceAccount
+    name: read-namespace
+    # namespace: set via kustomize
+
+# Role reference => Created in folder rbac
+roleRef:
+  kind: ClusterRole
+  name: read-namespace-cluster-role
+  apiGroup: rbac.authorization.k8s.io

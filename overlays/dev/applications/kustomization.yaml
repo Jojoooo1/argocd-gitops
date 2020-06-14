@@ -1,0 +1,20 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: default #
+
+bases:
+  - ../../../base/applications/spring-app
+
+resources:
+  - spring-app/database/pv.yaml
+  
+patchesStrategicMerge:
+  - spring-app/deployment-patch.yaml
+  - spring-app/configmap-patch.yaml
+
+  - spring-app/database/deployment-patch.yaml
+  
+# images:
+# - name: alexmt/argocd-demo
+#   newTag: 3824e3ce01af4947d4375c2d8fb22159d12e5c04

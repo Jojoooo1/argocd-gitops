@@ -1,0 +1,42 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: spring-app-database-deployment
+  
+  labels:
+    app: spring-app
+    role: database
+
+spec:
+  replicas: 1
+  
+  selector:
+    matchLabels:
+      app: spring-app
+      role: database
+
+  template:
+    metadata:
+      labels:
+        app: spring-app
+        role: database
+
+    spec:
+      serviceAccountName: default # d. if you wanna set specific RBAC to the pod
+      containers:
+        - name: spring-app-database
+          image: mysql
+          imagePullPolicy: IfNotPresent # d. Always
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: "password"
+            - name: MYSQL_DATABASE
+              value: "database"
+            - name: MYSQL_USER
+              value: "jonathan"
+            - name: MYSQL_PASSWORD
+              value: "password"
+          ports:
+            - containerPort: 3306

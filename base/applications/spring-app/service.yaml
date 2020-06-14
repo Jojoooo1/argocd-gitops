@@ -1,0 +1,23 @@
+---
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: spring-app-backend-service # dns
+  # namespace: set via kustomize
+
+  labels:
+    app: spring-app
+    role: backend
+
+spec:
+  selector:
+    app: spring-app
+    role: backend
+
+  type: ClusterIP # d.
+  ports:
+    - protocol: TCP
+      port: 8080 # Port exposed by the service
+      targetPort: 8080 # Port exposed by the pod
+      # nodePort: 30007 # exposed by the k8s node (only used with type: NodePort)

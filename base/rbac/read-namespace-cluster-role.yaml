@@ -1,0 +1,13 @@
+# Authorization for Java application
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole # is cluster scoped
+# kind: Role # is namespace scoped
+metadata:
+  name: read-namespace-cluster-role
+  # namespace: # only use with Role since it is namespace scoped
+
+rules:
+  - apiGroups: [""]
+    resources: ["configmaps", "pods", "services", "endpoints", "secrets"]
+    verbs: ["get", "list", "watch"]

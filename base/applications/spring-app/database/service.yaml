@@ -1,0 +1,21 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: spring-app-database-service # dns
+
+  labels:
+    app: spring-app
+    role: database
+
+spec:
+  selector:
+    app: spring-app
+    role: database
+
+  ports:
+    - protocol: TCP # d.
+      # Port exposed by the service
+      port: 3306
+      # Port of the pod accessed
+      targetPort: 3306

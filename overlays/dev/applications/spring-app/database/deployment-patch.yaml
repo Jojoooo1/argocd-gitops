@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-app-database-deployment
+
+spec:
+  template:
+    spec:
+      containers:
+        - name: spring-app-database
+          volumeMounts:
+            - name: mysql-pv
+              mountPath: /var/lib/mysql
+
+      volumes:
+      - name: mysql-pv
+        persistentVolumeClaim:
+          claimName: mysql-pvc

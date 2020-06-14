@@ -1,0 +1,68 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: spring-app-backend-deployment
+  # namespace: set via kustomize
+  labels:
+    app: spring-app # will be used by kialis
+    role: backend
+
+spec:
+
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-app
+      role: backend
+
+  template:
+    metadata:
+      labels:
+        app: spring-app
+        role: backend
+        
+    spec:
+      # Sets specific ServiceAccount for being to read from Kubernetes API
+      serviceAccountName: read-namespace
+      # restartPolicy: Always # d.
+      containers:
+        - name: spring-app-backend
+          image: docker.io/jojoooo1/carros:latest
+          # imagePullPolicy: Always # d.
+          env:
+            - name: JAVA_TOOL_OPTIONS # used by distroless image
+              value: "-Xms256m -Xmx512m"
+          ports:
+            - name: container-port
+              containerPort: 8080
+          #  Should restart container
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: container-port # using ports.name
+            initialDelaySeconds: 10
+            periodSeconds: 3
+          # Ready to start accepting traffic
+          readinessProbe:
+            initialDelaySeconds: 20
+            periodSeconds: 10
+            httpGet:
+              path: /actuator/health/readiness
+              port: container-port # using ports.name
+          # Graceful Shutdown (Container waits 10sec before being killed in order for tx to finish)
+          lifecycle:
+            preStop:
+              exec:
+                command: ["sh", "-c", "sleep 10"]
+          # 
+          # RESOURCES becarefull with container compatibility (JAVA_TOOL_OPTIONS)
+          # resources:
+          #   requests:
+          #     memory: "128Mi" # jib: -Xms512m # 94, 76.412 seconds 
+          #     cpu: "0.5"
+          # Needs to be burstable because Spring needs lots of resources at creation
+          #   limits:
+          #     memory: "1024Mi" # jib: -Xmx1024m
+          #     cpu: "2"
