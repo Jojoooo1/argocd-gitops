@@ -2,7 +2,6 @@
 **/keys/*
 **/*-keyfile.json
 
-**/*secret.yaml
 **/*secret.json
 
 **/*.key
