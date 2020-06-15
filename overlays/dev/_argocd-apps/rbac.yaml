@@ -13,7 +13,7 @@ spec:
   source:
     repoURL: https://github.com/Jojoooo1/argocd-gitops.git
     targetRevision: master
-    path: base/rbac
+    path: overlays/dev/rbac
   destination:
     server: https://kubernetes.default.svc
     namespace: default
